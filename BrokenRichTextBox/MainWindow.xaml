@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrokenRichTextBox"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="Rich Text Box Testing" Height="350" Width="525">
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <CheckBox Content="Enable Extra" Grid.Row="0" VerticalAlignment="Center"/>
+        <Slider Name="FontZoomSlider" Grid.Row="0" Width="150" Value="2" Minimum="0.3" Maximum="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <local:CustomRichTextBox x:Name="richTextBox" 
+                                 Grid.Row="1" 
+                                 SpellCheck.IsEnabled="True"
+                                 ScaleX="{Binding ElementName=FontZoomSlider, Path=Value}" 
+                                 ScaleY="{Binding ElementName=FontZoomSlider, Path=Value}"
+                                 AcceptsTab="True">
+            <local:CustomRichTextBox.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding ElementName=richTextBox, Path=ScaleX, Mode=TwoWay}" 
+                                ScaleY="{Binding ElementName=richTextBox, Path=ScaleY, Mode=TwoWay}"/>
+            </local:CustomRichTextBox.LayoutTransform>
+            <FlowDocument>
+                <Paragraph>
+                    <Run>I am some sample text withhh typooos</Run>
+                </Paragraph>
+                <Paragraph>
+                    <Run FontStyle="Italic">I am some more sample text in italic</Run>
+                </Paragraph>
+            </FlowDocument>
+        </local:CustomRichTextBox>
     </Grid>
 </Window>
