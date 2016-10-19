@@ -26,6 +26,7 @@ namespace BrokenRichTextBox
             updateAdorner(null, null);
         }
 
+        // Fixing missing caret bug code adjusted from: http://stackoverflow.com/questions/5180585/viewbox-makes-richtextbox-lose-its-caret
         private void updateAdorner(object sender, EventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() =>
