@@ -5,23 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrokenRichTextBox"
         mc:Ignorable="d"
-        Title="Rich Text Box Testing" Height="350" Width="525">
+        Title="Rich Text Box Testing" Height="480" Width="640">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <!--CheckBox Content="Enable Extra" Grid.Row="0" VerticalAlignment="Center"/-->
+        <Label Content="Broken RichTextBox" Grid.Row="0"/>
         <Slider Name="FontZoomSlider" Grid.Row="0" Width="150" Value="2" Minimum="0.3" Maximum="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <local:CustomRichTextBox x:Name="richTextBox" 
+        <local:CustomRichTextBox x:Name="RichTextBox" 
                                  Grid.Row="1" 
                                  SpellCheck.IsEnabled="True"
                                  ScaleX="{Binding ElementName=FontZoomSlider, Path=Value}" 
                                  ScaleY="{Binding ElementName=FontZoomSlider, Path=Value}"
                                  AcceptsTab="True">
             <local:CustomRichTextBox.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding ElementName=richTextBox, Path=ScaleX, Mode=TwoWay}" 
-                                ScaleY="{Binding ElementName=richTextBox, Path=ScaleY, Mode=TwoWay}"/>
+                <ScaleTransform ScaleX="{Binding ElementName=RichTextBox, Path=ScaleX, Mode=TwoWay}" 
+                                ScaleY="{Binding ElementName=RichTextBox, Path=ScaleY, Mode=TwoWay}"/>
             </local:CustomRichTextBox.LayoutTransform>
             <FlowDocument>
                 <Paragraph>
@@ -32,5 +35,25 @@
                 </Paragraph>
             </FlowDocument>
         </local:CustomRichTextBox>
+        <Label Content="Better/Fixed RichTextBox" Grid.Row="2"/>
+        <local:FixedCustomRichTextBox x:Name="FixedRichTextBox" 
+                                 Grid.Row="3" 
+                                 SpellCheck.IsEnabled="True"
+                                 ScaleX="{Binding ElementName=FontZoomSlider, Path=Value}" 
+                                 ScaleY="{Binding ElementName=FontZoomSlider, Path=Value}"
+                                 AcceptsTab="True">
+            <local:FixedCustomRichTextBox.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding ElementName=FixedRichTextBox, Path=ScaleX, Mode=TwoWay}" 
+                                ScaleY="{Binding ElementName=FixedRichTextBox, Path=ScaleY, Mode=TwoWay}"/>
+            </local:FixedCustomRichTextBox.LayoutTransform>
+            <FlowDocument>
+                <Paragraph>
+                    <Run>I am some sample text withhh typooos</Run>
+                </Paragraph>
+                <Paragraph>
+                    <Run FontStyle="Italic">I am some more sample text in italic</Run>
+                </Paragraph>
+            </FlowDocument>
+        </local:FixedCustomRichTextBox>
     </Grid>
 </Window>
